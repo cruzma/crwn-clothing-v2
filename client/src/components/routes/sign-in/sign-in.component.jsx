@@ -51,13 +51,11 @@ const signin = async(e)  => {
 
   const json = await response.json()
   
-    if(json.message){
-      alert(json.message)
-    } else {
-      alert('logged in')
-    }
-
-
+  if(json.message){
+    alert(json.message)
+  } else {
+    alert('logged in')
+  }
   
 
 }
