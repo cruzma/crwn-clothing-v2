@@ -20,6 +20,10 @@ export const SignUpForm = () => {
 
   const registerData = { displayName, email, password }
 
+  const resetFormFields = () => {
+    setFormFields(defaultFormFields)
+}
+
   const handleChange = (event) => {
     const { name, value } = event.target
   
@@ -48,7 +52,9 @@ export const SignUpForm = () => {
     } catch(error){
       console.log(error)
     }
-  
+
+    resetFormFields();
+    
   }
 
   return (

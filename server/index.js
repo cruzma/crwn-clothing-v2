@@ -22,21 +22,28 @@ app.post('/sign-up', (req, res) => {
 
     console.log("I got the request")
 
-    const username = req.body.nameReg
-    const email = req.body.emailReg
-    const password = req.body.passwordReg 
+    const username = req.body.displayName
+    const email = req.body.email
+    const password = req.body.password
 
     db.query(
         "INSERT INTO users (username, email, password) VALUES (?,?,?)", 
         [username, email, password],
         (err, result) => {
-            console.log(err)
             if(err){
+
                 if(err.code === 'ER_DUP_ENTRY'){
                     res.send({message: "Email is already in use, please use different email"})
                 }
+
+                console.log('User encountered an error', err)
+
+            } else {
+
+                res.send({message: "sign up successfull"})
             }
-            console.log("transfer to database successful")
+
+            
         }
     );
 
@@ -44,8 +51,8 @@ app.post('/sign-up', (req, res) => {
 
 app.post('/sign-in', (request, response) => {
     
-    const email = request.body.loginEmail
-    const password = request.body.loginPassword
+    const email = request.body.email
+    const password = request.body.password
 
     db.query(
         "SELECT * FROM users WHERE email = ? AND password = ?", 
@@ -56,7 +63,7 @@ app.post('/sign-in', (request, response) => {
             }
 
             if (result.length > 0){
-                response.send(result)
+                response.send({message: "successfully signed in"})
             } else{
                 response.send({message: "Wrong username/password combination"})
             }
