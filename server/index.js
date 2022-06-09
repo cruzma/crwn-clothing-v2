@@ -31,6 +31,11 @@ app.post('/sign-up', (req, res) => {
         [username, email, password],
         (err, result) => {
             console.log(err)
+            if(err){
+                if(err.code === 'ER_DUP_ENTRY'){
+                    res.send({message: "Email is already in use, please use different email"})
+                }
+            }
             console.log("transfer to database successful")
         }
     );

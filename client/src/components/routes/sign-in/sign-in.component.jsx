@@ -31,10 +31,12 @@ const signup = async(e)  => {
     body: JSON.stringify(registerData)
   })
   const json = await response.json()
-  console.log(json);
 
-  console.log("its doing something");
-  
+  if(json.message){
+    alert(json.message)
+  } else {
+    alert('Succesfully signed up!')
+  }
 
 }
 
