@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 
 import { FormInput } from '../form-input/FormInput.component'
 
 import { Button } from '../button/button.component'
+
+import { UserContext } from '../../contexts/user.context'
 
 import './sign-up-form.style.scss'
 
@@ -10,13 +12,17 @@ const defaultFormFields = {
   displayName: '',
   email: '',
   password: '',
-  confirmPassword: ''
+  confirmPassword: '',
 }
 
 export const SignUpForm = () => {
 
   const [formFields, setFormFields ] = useState(defaultFormFields)
-  const { displayName, email, password, confirmPassword} = formFields
+  const { displayName, email, password, confirmPassword } = formFields
+
+  const { setCurrentUser } = useContext(UserContext);
+
+  console.log('hit')
 
   const registerData = { displayName, email, password }
 
@@ -47,6 +53,9 @@ export const SignUpForm = () => {
         body: JSON.stringify(registerData)
       })
       const json = await response.json()
+
+      setCurrentUser(response)
+
       alert(json.message)
     
     } catch(error){
