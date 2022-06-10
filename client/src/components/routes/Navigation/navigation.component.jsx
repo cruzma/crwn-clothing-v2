@@ -6,8 +6,9 @@ import { UserContext } from "../../../contexts/user.context"
 import './navigation.styles.scss'
 
 export const Navigation = () => {
+  
     const { currentUser, setCurrentUser } = useContext(UserContext)
-    console.log(currentUser)
+
     return(
       <Fragment>
         <div className="navigation">
