@@ -7,8 +7,8 @@ const cors = require('cors');
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',
-    database: 'loginsystem'
+    password: 'root',
+    database: 'crwn_db'
     // database: 'CRUDDatabase'
 })
 app.listen(3001, () => {
